@@ -58,7 +58,7 @@ module Legion
           end
 
           def disengagement_difficulty
-            (@emotional_intensity * 0.4 + @dwell_level * 0.4 + @complexity * 0.2).round(10)
+            ((@emotional_intensity * 0.4) + (@dwell_level * 0.4) + (@complexity * 0.2)).round(10)
           end
 
           def dwell_label
@@ -67,7 +67,7 @@ module Legion
           end
 
           def engagement_label
-            score = (@dwell_level * 0.6 + @salience * 0.4).round(10)
+            score = ((@dwell_level * 0.6) + (@salience * 0.4)).round(10)
             match = ENGAGEMENT_LABELS.find { |range, _| range.cover?(score) }
             match ? match.last : :disengaged
           end
@@ -79,23 +79,23 @@ module Legion
 
           def to_h
             {
-              id:                      @id,
-              content:                 @content,
-              topic_type:              @topic_type,
-              salience:                @salience,
-              novelty:                 @novelty,
-              emotional_intensity:     @emotional_intensity,
-              complexity:              @complexity,
-              dwell_level:             @dwell_level,
-              dwell_label:             dwell_label,
-              sticky:                  sticky?,
-              fleeting:                fleeting?,
-              ruminating:              ruminating?,
+              id:                       @id,
+              content:                  @content,
+              topic_type:               @topic_type,
+              salience:                 @salience,
+              novelty:                  @novelty,
+              emotional_intensity:      @emotional_intensity,
+              complexity:               @complexity,
+              dwell_level:              @dwell_level,
+              dwell_label:              dwell_label,
+              sticky:                   sticky?,
+              fleeting:                 fleeting?,
+              ruminating:               ruminating?,
               disengagement_difficulty: disengagement_difficulty,
-              disengage_label:         disengage_label,
-              engagement_count:        @engagement_count,
-              engagement_label:        engagement_label,
-              created_at:              @created_at
+              disengage_label:          disengage_label,
+              engagement_count:         @engagement_count,
+              engagement_label:         engagement_label,
+              created_at:               @created_at
             }
           end
 
@@ -103,10 +103,10 @@ module Legion
 
           def compute_initial_dwell
             (BASE_DWELL +
-             @salience * SALIENCE_WEIGHT +
-             @novelty * NOVELTY_WEIGHT +
-             @emotional_intensity * EMOTION_WEIGHT +
-             @complexity * COMPLEXITY_WEIGHT).clamp(0.0, 1.0).round(10)
+             (@salience * SALIENCE_WEIGHT) +
+             (@novelty * NOVELTY_WEIGHT) +
+             (@emotional_intensity * EMOTION_WEIGHT) +
+             (@complexity * COMPLEXITY_WEIGHT)).clamp(0.0, 1.0).round(10)
           end
         end
       end

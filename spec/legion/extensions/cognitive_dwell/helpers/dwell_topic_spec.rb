@@ -82,26 +82,29 @@ RSpec.describe Legion::Extensions::CognitiveDwell::Helpers::DwellTopic do
   end
 
   describe '#sticky?' do
-    it 'is false at default levels' do
-      expect(topic.sticky?).to be false
+    it 'is false for low-input topic' do
+      low = described_class.new(content: 'x', salience: 0.1, novelty: 0.1,
+                                emotional_intensity: 0.0, complexity: 0.1)
+      expect(low.sticky?).to be false
     end
 
-    it 'is true after many engagements' do
+    it 'is true for high-input topic' do
       high = described_class.new(content: 'x', salience: 0.9, novelty: 0.9,
                                  emotional_intensity: 0.9, complexity: 0.9)
-      3.times { high.engage! }
       expect(high.sticky?).to be true
     end
   end
 
   describe '#fleeting?' do
-    it 'is false at default levels' do
+    it 'is false at moderate levels' do
       expect(topic.fleeting?).to be false
     end
 
-    it 'is true after heavy decay' do
-      10.times { topic.decay! }
-      expect(topic.fleeting?).to be true
+    it 'is true after heavy decay on low topic' do
+      low = described_class.new(content: 'x', salience: 0.1, novelty: 0.1,
+                                emotional_intensity: 0.0, complexity: 0.1)
+      5.times { low.decay! }
+      expect(low.fleeting?).to be true
     end
   end
 

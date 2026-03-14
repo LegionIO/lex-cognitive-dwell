@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Cognitive dwell time modeling for LegionIO'
   spec.description   = 'Models how long the system lingers on topics based on salience, novelty, emotional ' \
-                        'intensity, and complexity. Detects sticky topics and rumination.'
+                       'intensity, and complexity. Detects sticky topics and rumination.'
   spec.homepage      = 'https://github.com/LegionIO/lex-cognitive-dwell'
   spec.license       = 'MIT'
 

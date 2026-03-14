@@ -8,7 +8,7 @@ module Legion
           include Constants
 
           def initialize
-            @topics          = {}
+            @topics = {}
             @current_topic_id = nil
           end
 
@@ -86,14 +86,14 @@ module Legion
 
           def dwell_report
             {
-              total_topics:                    @topics.size,
-              current_topic:                   current_topic&.to_h,
-              sticky_count:                    sticky_topics.size,
-              fleeting_count:                  fleeting_topics.size,
-              ruminating_count:                ruminating_topics.size,
-              average_dwell:                   average_dwell,
+              total_topics:                     @topics.size,
+              current_topic:                    current_topic&.to_h,
+              sticky_count:                     sticky_topics.size,
+              fleeting_count:                   fleeting_topics.size,
+              ruminating_count:                 ruminating_topics.size,
+              average_dwell:                    average_dwell,
               average_disengagement_difficulty: average_disengagement_difficulty,
-              most_engaging:                   most_engaging(limit: 3).map(&:to_h)
+              most_engaging:                    most_engaging(limit: 3).map(&:to_h)
             }
           end
 
